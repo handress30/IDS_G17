@@ -38,6 +38,11 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    public function profile()
+    {
+        return $this->belongsTo(\App\Models\Domain::class, 'id_profile');
+    }
     protected function casts(): array
     {
         return [

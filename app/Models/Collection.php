@@ -16,10 +16,16 @@ class Collection extends Model
         'date_requested',
         'status',
         'weight',
+        'waste_type_id'
     ];
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function wasteType(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(WasteType::class);
     }
 }

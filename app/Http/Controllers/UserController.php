@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Models\Domain;
 
 class UserController extends Controller
 {
@@ -23,7 +23,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //importamos los perfiles con id_padre 1
+        $profiles = Domain::where('id_father', 1)->get();
+
+        return view('users.create', compact('profiles'));
     }
 
     /**
@@ -31,7 +34,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            'id_profile' => 'required|exists:domains,id',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'id_profile' => $request->id_profile,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     /**

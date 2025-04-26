@@ -65,9 +65,20 @@
                                         <p>Administrar Usuarios</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('waste-types.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Maestro tipos de residuos</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{ route('collections.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Registro Recolecciones</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

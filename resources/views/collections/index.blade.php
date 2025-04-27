@@ -1,3 +1,8 @@
+@php
+    use App\Http\Domain\UserProfileValidator;
+    use App\Http\Constants;
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Recolecciones')
@@ -8,15 +13,17 @@
 {{--
 @php
     dd(auth()->user()->profile->domain);
-@endphp 
+@endphp
 --}}
 
 
 <div class="container">
 
-    <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3 ml-auto icon-text-wrapper">      
-        <i class="fa fa-plus " ></i>
-        <p>Agregar</p></a>
+    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
+        <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3 ml-auto icon-text-wrapper">      
+            <i class="fa fa-plus " ></i>
+            <p>Agregar</p></a>
+    @endif
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -39,7 +46,10 @@
             <tr>
                 <td>{{ $collection->id }}</td>
                 <td>{{ $collection->user->name }}</td>
-                <td>{{ $collection->type_of_waste }}</td>
+                <td>
+                    <div style="display:inline-block; width: 15px; height: 15px; background-color: {{ $collection->wasteType->color_hex }}; border-radius: 50%; margin-left: 10px;"></div>
+                    <span> {{ $collection->wasteType->name }}</span>
+                </td>
                 <td>
                     @if($collection->status == 'Pendiente')
                     <span class="badge badge-warning">{{ $collection->status }}</span>
@@ -50,6 +60,7 @@
                 <td>{{ $collection->weight ?? '-' }}</td>
                 <td>{{ $collection->date_requested }}</td>
                 <td>
+<<<<<<< HEAD
                     <div class="flex items-center gap-4">
                         <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm"> <i class="fa fa-edit text-gray-600" ></i></a>
 
@@ -60,8 +71,21 @@
                         </form>
                     </div>
                  
+=======
+                    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
+                        <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    @endif
 
-                    @if (in_array(auth()->user()->profile->domain ?? '', ['SuperAdministrador', 'AdministradorRecolecciones', 'Recolector']))
+                    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
+                        <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">Eliminar</button>
+                        </form>
+                    @endif
+>>>>>>> 4251c8caa360530be5a789a08640264e7059df6e
+
+                    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
                     <!-- Botón que activa el modal -->
                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#confirmModal-{{ $collection->id }}">
                         Confirmar Recolección

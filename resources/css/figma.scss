@@ -1,0 +1,107 @@
+*:not(.fas):not(.fa):not(i):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands) {
+    font-family: 'Inter', sans-serif !important;
+}
+
+$primary: #337A3B;
+$secondary: #F1F8E9;
+$organico: #8BC34A;
+$inorganico: #9E9E9E;
+$peligroso: #F44336;
+$text-gray: #737373;
+
+.bg-primary{
+    background: $secondary !important;
+    color: white !important;
+}
+
+.bg-organico{
+    background: $organico !important;
+    color: white !important;
+}
+
+.sidebar-dark-primary{
+    background: $secondary;
+    color: $primary !important;
+
+    .brand-link{
+        color: $primary;
+        font-weight: bold !important;
+    }
+    p{
+        color: $primary;
+        font-weight: 500 !important;
+    }
+
+}
+
+i{
+    color: $primary;
+    font-weight: bold;
+}
+
+.nav-link{
+    gap: 8px;
+    display: flex;
+    align-items: center;
+
+    i{
+        font-size: 16px;
+    }
+}
+
+table{
+    border-radius: 5px;
+    overflow: hidden;
+    border: none;
+    background: white !important;
+    thead{
+        background: #ebebeb;
+        font-weight: bold !important;
+    }
+}
+
+.btn-primary{
+    background: $primary;
+    border: 1px solid $primary;
+    color: white !important;
+    font-weight: bold !important;
+    border-radius: 5px;
+    &:hover{
+        background: $primary;
+        border: 1px solid $primary;
+        color: white !important;
+    }
+}
+
+
+
+.icon-text-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: max-content;
+
+    i{
+        color: white;
+    }
+}
+
+.label-tipo-residuo{
+    color: white;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    width: min-content;
+}
+
+button,.btn{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+form{
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}

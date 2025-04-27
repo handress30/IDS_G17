@@ -13,9 +13,10 @@
 
 
 <div class="container">
-    <h1>Recolecciones</h1>
 
-    <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3">Crear nueva recolección</a>
+    <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3 ml-auto icon-text-wrapper">      
+        <i class="fa fa-plus " ></i>
+        <p>Agregar</p></a>
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -49,13 +50,16 @@
                 <td>{{ $collection->weight ?? '-' }}</td>
                 <td>{{ $collection->date_requested }}</td>
                 <td>
-                    <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <div class="flex items-center gap-4">
+                        <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm"> <i class="fa fa-edit text-gray-600" ></i></a>
 
-                    <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">Eliminar</button>
-                    </form>
+                        <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">  <i class="fa fa-trash text-white"></i></button>
+                        </form>
+                    </div>
+                 
 
                     @if (in_array(auth()->user()->profile->domain ?? '', ['SuperAdministrador', 'AdministradorRecolecciones', 'Recolector']))
                     <!-- Botón que activa el modal -->

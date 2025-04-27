@@ -5,22 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'IDS_G17')</title>
+    <title>@yield('title', 'SISREC PRO')</title>
 
     <!-- AdminLTE core -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- OverlayScrollbars (scroll bonito lateral) -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Aquí siguen tus propios assets (Vite) -->
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/js/app.js', 'resources/css/figma.scss'])
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+    <div class="wrapper bg-gray-100">
 
         {{-- NAVBAR  --}}
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light ">
             <!-- Botón hamburguesa -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -42,9 +43,10 @@
         </nav>
 
         {{-- SIDEBAR  --}}
+        
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="{{ url('/') }}" class="brand-link text-center">
-                <span class="brand-text font-weight-light">IDS_G17</span>
+                <span class="brand-text ">SISREC PRO</span>
             </a>
 
             <div class="sidebar">
@@ -55,27 +57,27 @@
                         {{-- Bloque “Sistema”  --}}
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-cogs"></i>
+                                <i class="fas fa-cogs "></i>
                                 <p>Sistema <i class="right fas fa-angle-left"></i></p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview pl-4">
                                 <li class="nav-item">
                                     <a href="{{ route('users.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa fa-user" aria-hidden="true"></i>
                                         <p>Administrar Usuarios</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('waste-types.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Maestro tipos de residuos</p>
+                                        <i class="fa fa-trash" ></i>
+                                        <p>Tipos de residuos</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('collections.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-recycle" ></i>
                                 <p>Registro Recolecciones</p>
                             </a>
                         </li>
@@ -103,7 +105,7 @@
 
         {{-- FOOTER opcional  --}}
         <footer class="main-footer text-sm">
-            <strong>&copy; {{ date('Y') }} IDS_G17</strong>
+            <strong>&copy; {{ date('Y') }} SISREC PRO</strong>
             <div class="float-right d-none d-sm-inline-block">
                 <b>Versión</b> 1.0
             </div>

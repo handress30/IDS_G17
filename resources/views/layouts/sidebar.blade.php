@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ url('/') }}" class="brand-link text-center">
-        <span class="brand-text font-weight-light">IDS_G17</span>
+        <span class="brand-text">SISREC PRO</span>
     </a>
 
     <div class="sidebar">

@@ -12,7 +12,7 @@ class CollectionController extends Controller
 {
     public function index()
     {
-        $collections = Collection::with(['user', 'wasteType'])->get();
+        $collections = Collection::with(['user.profile', 'wasteType'])->get();
         log::info("CollectionController index ", [$collections]);
         return view('collections.index', compact('collections'));
     }
@@ -59,6 +59,16 @@ class CollectionController extends Controller
 
         $collection->update($request->all());
         return redirect()->route('collections.index')->with('success', 'Colección actualizada exitosamente.');
+    }
+
+
+    public function confirm($id)
+    {
+        $collection = Collection::findOrFail($id);
+        $collection->status = 'Completado';
+        $collection->save();
+
+        return redirect()->route('collections.index')->with('success', 'Recolección confirmada exitosamente.');
     }
 
     public function destroy(Collection $collection)

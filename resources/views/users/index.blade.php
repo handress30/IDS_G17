@@ -31,7 +31,8 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->profile ?? 'Sin perfil' }}</td>
+                    <td>{{ $user->profile->domain ?? 'Sin perfil' }}</td>
+
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Editar</a>
                         {{-- Aquí luego agregamos botón Eliminar --}}

@@ -28,4 +28,12 @@ class Collection extends Model
     {
         return $this->belongsTo(WasteType::class);
     }
+    public function confirm($id)
+    {
+        $collection = \App\Models\Collection::findOrFail($id);
+        $collection->status = 'Completado';
+        $collection->save();
+
+        return redirect()->route('collections.index')->with('success', 'Recolección confirmada exitosamente.');
+    }
 }

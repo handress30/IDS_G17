@@ -8,7 +8,7 @@
 {{--
 @php
     dd(auth()->user()->profile->domain);
-@endphp 
+@endphp
 --}}
 
 
@@ -38,7 +38,10 @@
             <tr>
                 <td>{{ $collection->id }}</td>
                 <td>{{ $collection->user->name }}</td>
-                <td>{{ $collection->type_of_waste }}</td>
+                <td>
+                    <div style="display:inline-block; width: 15px; height: 15px; background-color: {{ $collection->wasteType->color_hex }}; border-radius: 50%; margin-left: 10px;"></div>
+                    <span> {{ $collection->wasteType->name }}</span>
+                </td>
                 <td>
                     @if($collection->status == 'Pendiente')
                     <span class="badge badge-warning">{{ $collection->status }}</span>

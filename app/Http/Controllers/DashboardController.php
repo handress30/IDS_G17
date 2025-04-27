@@ -2,21 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Domain\UserProfileValidator;
 use App\Models\Collection;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $collections = Collection::with('wasteType')->get();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        if (empty($startDate) || empty($endDate)) {
+            $startDate = Carbon::now()->startOfMonth();
+            $endDate = Carbon::now()->endOfMonth();
+        } else {
+            $startDate = Carbon::parse($startDate)->startOfDay();
+            $endDate = Carbon::parse($endDate)->endOfDay();
+        }
+
+        $collectionsQuery = Collection::with('wasteType')
+            ->whereBetween('date_requested', [$startDate, $endDate]);
+
+        if(UserProfileValidator::isAdminCompany()){
+            //$collectionsQuery->where('user_id', UserProfileValidator::getIdUser());
+        }else if(UserProfileValidator::isUser()){
+            $collectionsQuery->where('user_id', UserProfileValidator::getIdUser());
+        }
+
+        $collections = $collectionsQuery->get();
 
         $statusCounts = $collections->groupBy('status')->map(function ($items) {
             return $items->count();
         });
 
-        // Agrupar por tipo de residuo
         $summary = $collections->groupBy('waste_type_id')->map(function ($items) {
             $firstItem = $items->first();
             return [
@@ -27,9 +47,9 @@ class DashboardController extends Controller
             ];
         });
 
-        log::info("DashboardController index ", [$statusCounts]);
+        log::info("DashboardController index ", [$summary]);
 
-        return view('dashboard', compact('summary','statusCounts'));
+        return view('dashboard', compact('summary','statusCounts', 'startDate', 'endDate'));
     }
 
     /**

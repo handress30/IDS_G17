@@ -1,3 +1,8 @@
+@php
+    use App\Http\Domain\UserProfileValidator;
+    use App\Http\Constants;
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Recolecciones')
@@ -15,7 +20,9 @@
 <div class="container">
     <h1>Recolecciones</h1>
 
-    <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3">Crear nueva recolección</a>
+    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
+        <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3">Crear nueva recolección</a>
+    @endif
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -52,15 +59,19 @@
                 <td>{{ $collection->weight ?? '-' }}</td>
                 <td>{{ $collection->date_requested }}</td>
                 <td>
-                    <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
+                        <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    @endif
 
-                    <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">Eliminar</button>
-                    </form>
+                    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
+                        <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">Eliminar</button>
+                        </form>
+                    @endif
 
-                    @if (in_array(auth()->user()->profile->domain ?? '', ['SuperAdministrador', 'AdministradorRecolecciones', 'Recolector']))
+                    @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
                     <!-- Botón que activa el modal -->
                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#confirmModal-{{ $collection->id }}">
                         Confirmar Recolección

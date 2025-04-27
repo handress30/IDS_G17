@@ -11,17 +11,17 @@ class DomainsTableSeeder extends Seeder
     {
         DB::table('domains')->insert([
             [
-                'domain' => 'profiles',
+                'domain' => 'Perfiles',
                 'description' => 'Administrador de perfiles de usuario',
                 'id_father' => 0,
             ],
             [
-                'domain' => 'SuperAdmin',
+                'domain' => 'SuperAdministrador',
                 'description' => 'Superadministrador del sistema',
                 'id_father' => 1,
             ],
             [
-                'domain' => 'AdminCommerce',
+                'domain' => 'AdministradorRecolecciones',
                 'description' => 'Perfil administrador de empresas de recolección',
                 'id_father' => 1,
             ],

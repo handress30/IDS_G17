@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WasteTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ThirdPartyController;
 
 
 Route::resource('users', UserController::class)->middleware(['auth']);
@@ -16,6 +17,9 @@ Route::post('/collections/{collection}/confirm', [CollectionController::class, '
 Route::get('/', function () {
     return redirect()->route('dashboard');
 })->middleware(['auth']);
+Route::resource('collection_companies', ThirdPartyController::class, [
+    'names' => 'collection_companies'
+])->middleware(['auth']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

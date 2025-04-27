@@ -1,7 +1,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="{{ url('/') }}" class="brand-link text-center">
-        <span class="brand-text">SISREC PRO</span>
+    <a href="{{ url('/') }}" class="brand-link">
+        <img src="{{ asset('images/sisrec_logo_mini.png') }}" alt="Logo" class="brand-image elevation-3" style="height:33px; width:auto; opacity:.8;">
+
+        <span class="brand-text font-weight-light">SISREC PRO</span>
     </a>
+
 
     <div class="sidebar">
         <nav class="mt-2">

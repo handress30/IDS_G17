@@ -14,8 +14,8 @@ Route::resource('collections', CollectionController::class)->middleware(['auth']
 Route::post('/collections/{collection}/confirm', [CollectionController::class, 'confirm'])->name('collections.confirm');
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return redirect()->route('dashboard');
+})->middleware(['auth']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

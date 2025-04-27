@@ -38,6 +38,28 @@
     <div class="container">
         <h1 class="mb-4">Dashboard de Recolección de Residuos</h1>
 
+        <form method="GET" action="{{ route('dashboard') }}" class="mb-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="start_date">Fecha de Inicio</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control" value="{{ $startDate->format('Y-m-d') }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="end_date">Fecha de Fin</label>
+                    <input type="date" name="end_date" id="end_date" class="form-control" value="{{ $endDate->format('Y-m-d') }}">
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Separador con espaciado y bordes -->
+        <div style="margin-top: 30px; margin-bottom: 30px; border-top: 2px solid #ddd;"></div>
+
+
         <!-- Contador de Estado de Recolección -->
         <div class="row mb-4">
             @foreach($statusCounts as $status => $count)
@@ -51,6 +73,10 @@
                 </div>
             @endforeach
         </div>
+
+        <!-- Separador con espaciado y bordes -->
+        <div style="margin-top: 30px; margin-bottom: 30px; border-top: 2px solid #ddd;"></div>
+
 
         <!-- Resumen de Tipo de Residuo -->
         <div class="row mb-4">

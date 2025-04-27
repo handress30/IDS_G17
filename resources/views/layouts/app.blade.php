@@ -80,7 +80,7 @@
                         <li class="nav-item">
                             <a href="{{ route('collections.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Registro Recolecciones</p>
+                                <p>Recolecciones</p>
                             </a>
                         </li>
                     </ul>

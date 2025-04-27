@@ -1,6 +1,6 @@
 @php
-    use App\Http\Domain\UserProfileValidator;
-    use App\Http\Constants;
+use App\Http\Domain\UserProfileValidator;
+use App\Http\Constants;
 @endphp
 
 @extends('layouts.app')
@@ -20,9 +20,10 @@
 <div class="container">
 
     @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
-        <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3 ml-auto icon-text-wrapper">      
-            <i class="fa fa-plus " ></i>
-            <p>Agregar</p></a>
+    <a href="{{ route('collections.create') }}" class="btn btn-primary mb-3 ml-auto icon-text-wrapper">
+        <i class="fa fa-plus "></i>
+        <p>Agregar</p>
+    </a>
     @endif
 
     @if(session('success'))
@@ -60,30 +61,17 @@
                 <td>{{ $collection->weight ?? '-' }}</td>
                 <td>{{ $collection->date_requested }}</td>
                 <td>
-<<<<<<< HEAD
-                    <div class="flex items-center gap-4">
-                        <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm"> <i class="fa fa-edit text-gray-600" ></i></a>
-
-                        <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">  <i class="fa fa-trash text-white"></i></button>
-                        </form>
-                    </div>
-                 
-=======
                     @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
-                        <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ route('collections.edit', $collection->id) }}" class="btn btn-warning btn-sm">Editar</a>
                     @endif
 
                     @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
-                        <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">Eliminar</button>
-                        </form>
+                    <form action="{{ route('collections.destroy', $collection->id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar?')">Eliminar</button>
+                    </form>
                     @endif
->>>>>>> 4251c8caa360530be5a789a08640264e7059df6e
 
                     @if (in_array(UserProfileValidator::getNameProfileUser() ?? '', [Constants::PROFILE_ADMIN_ADMIN, Constants::PROFILE_ADMIN_COMPANY]))
                     <!-- Botón que activa el modal -->

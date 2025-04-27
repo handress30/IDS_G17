@@ -43,11 +43,13 @@
         </nav>
 
         {{-- SIDEBAR  --}}
-        
+
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="{{ url('/') }}" class="brand-link text-center">
-                <span class="brand-text font-weight-light">SISREC PRO</span>
+            <a href="{{ url('/') }}" class="brand-link d-flex align-items-center">
+                <img src="{{ asset('images/sisrec_logo_mini.png') }}" alt="Logo" class="brand-image elevation-3" style="height:33px; width:auto; opacity:.8;">
+                <span class="brand-text font-weight-light ms-2">SISREC PRO</span>
             </a>
+
 
             <div class="sidebar">
                 <nav class="mt-2">
@@ -73,10 +75,15 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('waste-types.index') }}" class="nav-link">
-                                        <i class="fa fa-trash" ></i>
+                                        <i class="fa fa-trash"></i>
                                         <p>Tipos de residuos</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('collection_companies.index') }}" class="nav-link">
+                                        <i class="fa fa-recycle"></i>
+                                        <p>Empresas Recolectoras</p>
+                                    </a>
                             </ul>
                         </li>
                         <li class="nav-item">
